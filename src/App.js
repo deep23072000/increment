@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { increment,decrement,cube,theme } from "./toolkit/couterSlice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 function App() {
+   const dispatch = useDispatch()
+   const show = useSelector((state)=>state.counter.value)
+   const show1 = useSelector((state)=>state.counter.cube)
+   const show2 = useSelector((state)=>state.counter.color)
+   const cubeval = 5;
+  const inc = ()=>{
+        dispatch(increment())
+  }
+  const dec = ()=>{
+    dispatch(decrement())
+  }
+  const cub = ()=>{
+    dispatch(cube(cubeval))
+  }
+  const thememode = ()=>{
+    dispatch(theme("red"))
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    {show}<br></br>{show1}
+      <button onClick={inc}>
+        increment
+      </button>
+      <button onClick={dec}>
+        decrement
+      </button>
+      <button onClick={cub}>
+        cube
+      </button>
+      <button onClick={thememode}>
+        color
+      </button>
+
+      <div style={{backgroundColor:show2,width:"100%",height:"20px"}}></div>
+    </>
   );
 }
 
